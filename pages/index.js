@@ -1,7 +1,37 @@
+import useSWR from "swr";
+import Card from "@/components/Card/Card";
+import styled from "styled-components";
+
+const List = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 0;
+`;
+
+const ListItem = styled.li`
+  position: relative;
+  width: 100%;
+`;
+
 export default function HomePage() {
+  const { data: recipes } = useSWR("/api/recipes");
+
+  if (!recipes) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-      <h1>Hello Next!</h1>
-    </div>
+    <List>
+      {recipes.map((recipe) => {
+        return (
+          <ListItem key={recipe._id}>
+            <Card recipe={recipe} />
+          </ListItem>
+        );
+      })}
+    </List>
   );
 }

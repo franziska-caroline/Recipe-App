@@ -7,8 +7,8 @@ const recipeSchema = new Schema({
   servings: { type: String, required: false },
   time: { type: String, required: false },
   image: { type: String, required: true },
-  ingredients: { type: String, required: true },
-  directions: { type: String, required: true },
+  ingredients: { type: Array, required: true },
+  directions: { type: Array, required: true },
 });
 
 const Recipe = mongoose.models.Recipe || mongoose.model("Recipe", recipeSchema);
