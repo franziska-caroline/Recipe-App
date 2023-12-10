@@ -20,12 +20,22 @@ export default function CreateRecipePage() {
 
     console.log(recipeData);
 
+    // map input to data base object
+    const dataForDb = {
+        title: recipeData.name,
+        servings: recipeData.servings,
+        time: recipeData.time,
+        image: recipeData.image,
+        ingredients: recipeData.ingredients,
+        directions: recipeData.directions
+    }
+
     const response = await fetch("/api/recipes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(recipeData),
+      body: JSON.stringify(dataForDb),
     });
 
     if (response.ok) {
