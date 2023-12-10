@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import Card from "@/components/Card/Card";
 import styled from "styled-components";
+import Link from "next/link";
 
 const List = styled.ul`
   list-style: none;
@@ -24,14 +25,17 @@ export default function HomePage() {
   }
 
   return (
-    <List>
-      {recipes.map((recipe) => {
-        return (
-          <ListItem key={recipe._id}>
-            <Card recipe={recipe} />
-          </ListItem>
-        );
-      })}
-    </List>
+    <>
+      <List>
+        {recipes.map((recipe) => {
+          return (
+            <ListItem key={recipe._id}>
+              <Card recipe={recipe} />
+            </ListItem>
+          );
+        })}
+      </List>
+      <Link href="/create">+</Link>
+    </>
   );
 }

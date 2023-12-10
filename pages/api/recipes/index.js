@@ -10,4 +10,17 @@ export default async function handler(request, response) {
     console.log("places: ", recipes);
     return response.status(200).json(recipes);
   }
+
+  // POST method
+
+  if (request.method === "POST") {
+    try {
+      const recipeData = request.body;
+      await Recipe.create(recipeData);
+      response.status(201).json({ status: "Recipe created" });
+    } catch (error) {
+      console.log(error);
+      response.status(400).json({ error: error.message });
+    }
+  }
 }
